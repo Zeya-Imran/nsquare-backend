@@ -70,26 +70,36 @@ export const getProductById = async (req, res) => {
 };
 
 //update by id
-export const updateProdcut = async (req, res) => {
+export const updateProduct = async (req, res) => {
   try {
     const updateId = req.params.id;
-    if (!updateId)
-      return res.status(401).json({
+    if (!updateId) {
+      return res.status(400).json({
         success: false,
-        message: "Id must be needed",
+        message: "ID is required",
       });
-    const updatedProdcut = await Product.findByIdAndUpdate(
-      { _id: updateId },
-      req.body,
-      { new: true }
-    );
-    if (!updatedProdcut)
+    }
+
+    if (!Object.keys(req.body).length) {
+      return res.status(400).json({
+        success: false,
+        message: "No fields to update",
+      });
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(updateId, req.body, {
+      new: true,
+    });
+
+    if (!updatedProduct) {
       return res
         .status(404)
-        .json({ success: false, message: "ID is required" });
+        .json({ success: false, message: "Product not found" });
+    }
+
     res.status(200).json({
       success: true,
-      data: updatedProdcut,
+      data: updatedProduct,
     });
   } catch (error) {
     res.status(500).json({

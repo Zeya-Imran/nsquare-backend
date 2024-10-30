@@ -4,7 +4,7 @@ import {
   deleteProduct,
   getAllProduct,
   getProductById,
-  updateProdcut,
+  updateProduct,
 } from "./products.controller.js";
 
 //create router
@@ -20,7 +20,7 @@ router.get("/", getAllProduct);
 router.get("/:id", getProductById);
 
 //update product
-router.put("/:id", updateProdcut);
+router.put("/:id", updateProduct);
 
 //delete product
 router.delete("/:id", deleteProduct);

@@ -39,6 +39,6 @@ const prodcutSchema = new Schema(
   { timestamps: true }
 );
 
-const Product = model("Prodcut", prodcutSchema);
+const Product = model("Product", prodcutSchema);
 
 export default Product;
